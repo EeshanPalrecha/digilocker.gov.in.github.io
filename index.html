@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aadhaar Card</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #f2f3f7;
+    margin: 0;
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+}
+
+/* ===== FLIP SETUP ===== */
+.card-scene {
+    perspective: 1200px;
+    width: 100%;
+    max-width: 380px;
+}
+
+.card {
+    width: 100%;
+    aspect-ratio: 380 / 640;   /* ✅ RESPONSIVE HEIGHT */
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.9s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+.card.is-flipped {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+/* ===== FRONT ===== */
+.card-front {
+    z-index: 2;
+}
+
+/* ===== BACK ===== */
+.card-back {
+    transform: rotateY(180deg);
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    display: grid;
+    place-items: center;
+}
+
+/* ===== BACK QR CONTENT ===== */
+.qr-back {
+    padding: 16px;
+    width: 100%;
+    max-width: 320px;
+}
+
+.qr-top-text {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+/* 🔑 FIXED QR SIZE */
+.qr-back img {
+    display: block;
+    margin: 0 auto;
+    width: min(220px, 60vw);   /* ✅ RESPONSIVE */
+    height: auto;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+.qr-bottom-text {
+    margin-top: 12px;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #555;
+    text-align: left;
+}
+
+.verify-link {
+    color: #2a6fd6;
+    word-break: break-word;
+}
+
+/* ===== MAIN CARD ===== */
+.aadhaar-container {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+/* ===== HEADER ===== */
+.header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+.back-arrow {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.header-title {
+    flex: 1;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.profile-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+}
+
+/* ===== LOGOS ===== */
+.gov-strip {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 12px;
+}
+
+.gov-strip img {
+    height: 48px;
+}
+
+/* ===== PROFILE ===== */
+.profile {
+    display: flex;
+    gap: 12px;
+    padding: 0 12px 8px;
+}
+
+.profile img {
+    width: 80px;
+    height: 100px;
+}
+
+.profile-details h3 {
+    font-size: 15px;
+}
+
+.profile-details p {
+    font-size: 13px;
+}
+
+/* ===== ADDRESS ===== */
+.address {
+    padding: 8px 12px;
+    border-top: 1px solid #eee;
+}
+
+.address p {
+    font-size: 12px;
+}
+
+/* ===== BOTTOM ===== */
+.bottom-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+}
+
+.digilocker {
+    height: 36px;
+}
+
+.qr {
+    width: 70px;
+    height: 70px;
+    background: #eaeaea;
+}
+
+.qr img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* ===== MOTTO ===== */
+.motto {
+    text-align: center;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    border-top: 1px solid #eee;
+}
+
+/* ===== INFO ===== */
+.info {
+    background: #f6f7fb;
+    padding: 10px;
+    font-size: 11px;
+    text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card-scene">
+<div class="card" id="flipCard">
+
+<!-- ===== FRONT ===== -->
+<div class="card-face card-front">
+<div class="aadhaar-container">
+
+<div class="header">
+    <div class="back-arrow">←</div>
+    <div class="header-title">Aadhaar Card</div>
+    <img src="images/eeshan.jpeg" class="profile-icon">
+</div>
+
+<div class="gov-strip">
+    <img src="images/goi.jpeg"width="240px" height="80px">
+    <img src="images/images (4).png">
+</div>
+
+<div class="profile">
+    <img src="images/eeshan.jpeg">
+    <div class="profile-details">
+        <h3>Eeshan Raja Palrecha</h3>
+        <p>2004-02-04</p>
+        <p>MALE</p>
+        <strong>XXXXXXXX7910</strong>
+    </div>
+</div>
+
+<div class="address">
+    <p>
+        S/O Raja Palrecha, 48, F ward, New Bazar, Lonavala, Maharashtra - 410401
+    </p>
+</div>
+
+<div class="bottom-row">
+    <img src="images/DigiLocker.png" class="digilocker">
+    <div class="qr">
+        <img src="images/qr.jpeg" id="smallQR">
+    </div>
+</div>
+
+<div class="motto">
+    मेरा <span style="color:red;">आधार</span>, मेरी पहचान
+</div>
+
+<div class="info">
+    Indian Railways and Airports accept Digital Aadhaar through DigiLocker.
+</div>
+
+</div>
+</div>
+
+<!-- ===== BACK ===== -->
+<div class="card-face card-back">
+    <div class="qr-back">
+        <div class="qr-top-text">
+            Verify using DigiLocker QR Scanner
+        </div>
+
+        <img src="images/qr.jpeg" id="bigQR">
+
+        <div class="qr-bottom-text">
+            <strong>How to verify:</strong><br>
+            1. DigiLocker App → Menu → Scan QR<br>
+            2. This certificate can also be verified by scanning the QR code at<br>
+            <span class="verify-link">https://verify.digilocker.gov.in</span>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+
+<script>
+const card = document.getElementById("flipCard");
+smallQR.onclick = () => card.classList.add("is-flipped");
+bigQR.onclick = () => card.classList.remove("is-flipped");
+</script>
+
+</body>
+</html>
